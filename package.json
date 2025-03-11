@@ -17,6 +17,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/moment": "^2.13.0",
     "@types/readline-sync": "^1.4.8",
+    "assignment-2": "file:",
     "fs-extra": "^11.3.0",
     "moment": "^2.30.1",
     "readline-sync": "^1.4.10",
