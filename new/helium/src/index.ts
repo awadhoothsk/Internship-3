@@ -14,17 +14,6 @@ const app = new Hono()
 //   console.log(`Server is running on http://localhost:${info.port}`)
 // })
 
-// const reminder = {
-//   id: '1',
-//   message: 'Hello Hono!',
-//   time: '2021-10-10',
-//   completed: false
-// }
-// app.get('/reminder', (c) => {
-//   return c.json(reminder, 200)  
-// })
-
-
 app.get('/random', (context) => {
   let random = Math.floor(Math.random() * 100)
   return context.json({ random }, 200)  
@@ -33,7 +22,26 @@ app.get('/random', (context) => {
 app.get('/time', (context) => {
   return context.json({ time: new Date().toISOString() }, 200)
 })
-app.get('/enviroment', (context) => {
-  return context.json({ env: process.env.NODE_ENV }, 200)
+app.get('/envirment', (context) => {
+  const envir = process.platform
+  const version = process.version
+  return context.json({ platform:envir, version: version }, 200)
 })
+
+// app.get('/puppet', (context) => {
+//   const puppet=url.get
+//   return context.json({ puppeteer: 'done' }, 200) 
+// })
+
+const nummbers : number[] = [];
+app.post('/store-number', async (context) => {
+  const body = await context.req.json();
+  const number = body.number;
+  nummbers.push(number);
+  return context.json({ stored: number }, 200);
+});
+app.get('/get-number', (context) => {
+  return context.json({ numbers: nummbers }, 200);
+}
+);
 serve(app);
